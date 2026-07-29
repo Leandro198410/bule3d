@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Bule 3d — fabricação e venda de peças impressas em 3D no Brasil. Utilidades, sinalização, suporte a e-commerce e produção sob demanda." />
+  <title>Bule 3d — Peças impressas em 3D no Brasil</title>
+  <style>
+    :root {
+      --ink: #1a1f1c;
+      --muted: #5c6560;
+      --bg: #f7f5f1;
+      --card: #ffffff;
+      --accent: #0f6251;
+      --accent-dark: #0c4f41;
+      --line: #e4e0d8;
+      --soft: #e8f3ef;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Georgia, "Times New Roman", Times, serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.55;
+      font-size: 17px;
+    }
+    .sans { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, sans-serif; }
+    a { color: var(--accent); }
+    header {
+      background: var(--ink);
+      color: #f5f7f6;
+      padding: 1rem 1.25rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 3px solid var(--accent);
+    }
+    .wrap {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .logo {
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      font-size: 1.15rem;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+    .logo-mark {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 0.45rem;
+      background: linear-gradient(145deg, #1a9b7a, var(--accent-dark));
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #fff;
+    }
+    nav a {
+      color: #d7e8e2;
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-left: 1rem;
+    }
+    nav a:hover { color: #fff; text-decoration: underline; }
+    .hero {
+      padding: 3.5rem 1.25rem 3rem;
+      background:
+        radial-gradient(ellipse at 20% 0%, #d9efe7 0%, transparent 55%),
+        radial-gradient(ellipse at 100% 40%, #efe8d8 0%, transparent 45%),
+        var(--bg);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.9fr;
+      gap: 2rem;
+      align-items: center;
+    }
+    @media (max-width: 760px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      nav a { margin-left: 0.75rem; }
+    }
+    h1 {
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+    .lead {
+      color: var(--muted);
+      font-size: 1.08rem;
+      max-width: 36rem;
+      margin-bottom: 1.5rem;
+    }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.15rem;
+      border-radius: 0.55rem;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover { background: var(--accent-dark); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--ink);
+      border: 1.5px solid var(--line);
+    }
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 1rem;
+      padding: 1.25rem 1.35rem;
+      box-shadow: 0 10px 30px rgba(26, 31, 28, 0.06);
+    }
+    .panel h3 {
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+      font-family: system-ui, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+    }
+    .stat {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+    .stat div {
+      background: var(--soft);
+      border-radius: 0.65rem;
+      padding: 0.75rem;
+    }
+    .stat strong {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--ink);
+      font-family: system-ui, sans-serif;
+    }
+    .stat span {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-family: system-ui, sans-serif;
+    }
+    section {
+      padding: 2.75rem 1.25rem;
+    }
+    section.alt { background: #fff; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    h2 {
+      font-size: 1.65rem;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+    .section-intro {
+      color: var(--muted);
+      max-width: 40rem;
+      margin-bottom: 1.75rem;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    @media (max-width: 760px) {
+      .cards { grid-template-columns: 1fr; }
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 0.9rem;
+      padding: 1.25rem;
+    }
+    .card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    .card p { color: var(--muted); font-size: 0.98rem; }
+    .tag {
+      display: inline-block;
+      font-family: system-ui, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      background: var(--soft);
+      padding: 0.25rem 0.5rem;
+      border-radius: 999px;
+      margin-bottom: 0.65rem;
+    }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      counter-reset: step;
+    }
+    @media (max-width: 760px) {
+      .steps { grid-template-columns: 1fr; }
+    }
+    .step {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 0.9rem;
+      padding: 1.2rem;
+      position: relative;
+    }
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      font-family: system-ui, sans-serif;
+      font-weight: 800;
+      color: var(--accent);
+      font-size: 1.25rem;
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+    .contact-box {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+    @media (max-width: 760px) {
+      .contact-box { grid-template-columns: 1fr; }
+    }
+    .contact-box dl {
+      font-family: system-ui, sans-serif;
+      font-size: 0.95rem;
+    }
+    .contact-box dt {
+      color: var(--muted);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 0.85rem;
+    }
+    .contact-box dd {
+      margin-top: 0.2rem;
+      font-weight: 600;
+    }
+    footer {
+      padding: 2rem 1.25rem 2.5rem;
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-family: system-ui, sans-serif;
+      border-top: 1px solid var(--line);
+    }
+    footer .wrap {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .note {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 1rem;
+      font-family: system-ui, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav sans">
+      <div class="logo">
+        <span class="logo-mark">B3</span>
+        <span>Bule 3d</span>
+      </div>
+      <nav>
+        <a href="#sobre">Sobre</a>
+        <a href="#produtos">Produtos</a>
+        <a href="#como">Como trabalhamos</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="tag sans">Brasil · impressão 3D sob demanda</p>
+          <h1>Peças impressas em 3D para o dia a dia e para o seu negócio</h1>
+          <p class="lead">
+            A Bule 3d fabrica e vende utilidades, sinalização e acessórios produzidos
+            por impressão 3D. Do pedido à peça pronta, com foco em uso real —
+            loja, balcão, expedição e personalização sob demanda.
+          </p>
+          <div class="cta-row sans">
+            <a class="btn btn-primary" href="#contato">Falar com a Bule 3d</a>
+            <a class="btn btn-ghost" href="#produtos">Ver tipos de produto</a>
+          </div>
+        </div>
+        <aside class="panel">
+          <h3>O que você encontra aqui</h3>
+          <p style="color:var(--muted);font-size:0.95rem;margin-bottom:0.75rem;">
+            Produção própria em impressão 3D, voltada ao mercado brasileiro.
+            Atendimento por e-mail e venda em marketplaces e canais próprios.
+          </p>
+          <div class="stat">
+            <div>
+              <strong>Fabricação própria</strong>
+              <span>Impressão e acabamento sob demanda</span>
+            </div>
+            <div>
+              <strong>Uso comercial</strong>
+              <span>Peças para loja, balcão e operação</span>
+            </div>
+            <div>
+              <strong>Personalização</strong>
+              <span>Textos, logos e medidas sob consulta</span>
+            </div>
+            <div>
+              <strong>Brasil</strong>
+              <span>Atendimento e envio no mercado local</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="sobre">
+      <div class="wrap">
+        <h2>O que fazemos</h2>
+        <p class="section-intro">
+          Transformamos modelos 3D em produtos físicos prontos para uso e venda.
+          A operação cobre desde a escolha do modelo e do material até o cálculo
+          de custo de impressão, o cadastro para marketplaces e o envio da peça.
+        </p>
+        <div class="cards">
+          <article class="card">
+            <span class="tag">Produção</span>
+            <h3>Impressão 3D sob demanda</h3>
+            <p>
+              Produzimos peças em materiais como PLA e PETG, com tempos e pesos
+              estimados a partir do perfil de impressão. Cada item é fabricado
+              sob pedido, sem estoque genérico inventado.
+            </p>
+          </article>
+          <article class="card">
+            <span class="tag">Comercial</span>
+            <h3>Venda em marketplaces e canais próprios</h3>
+            <p>
+              Preparamos anúncios e planilhas de carga em massa para ERP e
+              marketplaces brasileiros (por exemplo Bling), com os campos
+              cadastrais necessários para publicação.
+            </p>
+          </article>
+          <article class="card">
+            <span class="tag">Operação</span>
+            <h3>Ferramentas internas de cadastro</h3>
+            <p>
+              Usamos um hub interno para importar modelos de repositórios 3D,
+              estimar custo de impressão e organizar palavras-chave e campos
+              de portal — sem automação de campanhas publicitárias.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="produtos" class="alt">
+      <div class="wrap">
+        <h2>Tipos de produto</h2>
+        <p class="section-intro">
+          Catálogo típico de utilidades impressas em 3D. Itens e personalizações
+          sob consulta — disponibilidade depende do modelo e da licença de uso.
+        </p>
+        <div class="cards">
+          <article class="card">
+            <h3>Sinalização e balcão</h3>
+            <p>
+              Placas e displays para pagamento, QR Code, identificação de mesa
+              e comunicação visual de pequeno porte para comércio e serviços.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Organização e expedição</h3>
+            <p>
+              Suportes, guias e organizadores para bancada, cabos, etiquetas e
+              fluxo de embalagem — feitos sob demanda para uso diário.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Acessórios e peças sob medida</h3>
+            <p>
+              Peças utilitárias, jigs e componentes personalizados a partir de
+              modelos 3D com licença adequada para uso comercial.
+            </p>
+          </article>
+        </div>
+        <p class="note">
+          Licenças de modelos de terceiros são respeitadas. Modelos com restrição
+          de uso comercial não são comercializados sem autorização do autor.
+        </p>
+      </div>
+    </section>
+
+    <section id="como">
+      <div class="wrap">
+        <h2>Como trabalhamos</h2>
+        <p class="section-intro">
+          Fluxo simples, do modelo digital à peça física e ao anúncio.
+        </p>
+        <div class="steps sans">
+          <div class="step">
+            <h3 style="margin-bottom:0.4rem;">Modelo e licença</h3>
+            <p style="color:var(--muted);font-size:0.95rem;">
+              Partimos de um modelo 3D (próprio ou de repositório com licença
+              compatível), com tempo e peso de impressão estimados.
+            </p>
+          </div>
+          <div class="step">
+            <h3 style="margin-bottom:0.4rem;">Custo e cadastro</h3>
+            <p style="color:var(--muted);font-size:0.95rem;">
+              Calculamos custo de produção (material, tempo de máquina) e
+              preenchemos os campos da planilha de carga para ERP/marketplace.
+            </p>
+          </div>
+          <div class="step">
+            <h3 style="margin-bottom:0.4rem;">Impressão e envio</h3>
+            <p style="color:var(--muted);font-size:0.95rem;">
+              Imprimimos, fazemos o acabamento básico e preparamos o envio
+              conforme o canal de venda.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato" class="alt">
+      <div class="wrap contact-box">
+        <div>
+          <h2>Contato</h2>
+          <p class="section-intro" style="margin-bottom:1rem;">
+            Para pedidos, orçamentos, personalização ou dúvidas sobre licença
+            de modelos, fale conosco por e-mail.
+          </p>
+          <a class="btn btn-primary sans" href="mailto:loja.bule3d@gmail.com">
+            loja.bule3d@gmail.com
+          </a>
+          <p class="note">
+            Resposta em horário comercial (Brasília). Informe o tipo de peça,
+            quantidade e se há personalização (logo, texto, medidas).
+          </p>
+        </div>
+        <div class="panel">
+          <h3>Dados do negócio</h3>
+          <dl>
+            <dt>Nome</dt>
+            <dd>Bule 3d</dd>
+            <dt>Atividade</dt>
+            <dd>Fabricação e venda de peças impressas em 3D</dd>
+            <dt>Mercado</dt>
+            <dd>Brasil</dd>
+            <dt>E-mail</dt>
+            <dd><a href="mailto:loja.bule3d@gmail.com">loja.bule3d@gmail.com</a></dd>
+            <dt>Idioma</dt>
+            <dd>Português (Brasil)</dd>
+          </dl>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>© <span id="y"></span> Bule 3d · Peças impressas em 3D no Brasil</span>
+      <span>Contato: loja.bule3d@gmail.com</span>
+    </div>
+  </footer>
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
